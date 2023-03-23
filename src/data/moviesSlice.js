@@ -7,14 +7,16 @@ export const fetchMovies = createAsyncThunk('fetch-movies', async (apiUrl) => {
 
 const moviesSlice = createSlice({
     name: 'movies',
-    initialState: { 
+    initialState: {
         movies: [],
         fetchStatus: '',
+        totalPages: null
     },
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(fetchMovies.fulfilled, (state, action) => {
-            state.movies = action.payload
+            state.movies = [...state.movies, ...action.payload.results]
+            state.totalPages = action.payload.total_pages
             state.fetchStatus = 'success'
         }).addCase(fetchMovies.pending, (state) => {
             state.fetchStatus = 'loading'
