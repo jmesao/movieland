@@ -1,21 +1,23 @@
 import { useEffect } from 'react'
 
-const options = {
+const defaultOptions = {
     root: null,
     rootMargin: '20px',
     threshold: 1.0
 }
 
-const UseInfiniteScroll = ({ ref, haveMoreItems, loadMoreItems }) => {
+const UseInfiniteScroll = ({ ref, haveMoreItems, loadMoreItems, options }) => {
 
     const handleObserver = (entries) => {
         if (entries[0].isIntersecting && haveMoreItems) {
-            loadMoreItems()
+            loadMoreItems?.()
         }
     }
 
+    const mergedOptions = { ...defaultOptions, ...options }
+
     useEffect(() => {
-        const observer = new IntersectionObserver(handleObserver, options)
+        const observer = new IntersectionObserver(handleObserver, mergedOptions)
 
         if (ref.current) {
             observer.observe(ref.current)
@@ -27,6 +29,13 @@ const UseInfiniteScroll = ({ ref, haveMoreItems, loadMoreItems }) => {
             }
         }
     }, [haveMoreItems])
+}
+
+UseInfiniteScroll.defaultProps = {
+    ref: null,
+    haveMoreItems: true,
+    loadMoreItems: null,
+    options: null
 }
 
 export default UseInfiniteScroll

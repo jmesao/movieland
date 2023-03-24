@@ -15,8 +15,10 @@ const moviesSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(fetchMovies.fulfilled, (state, action) => {
-            state.movies = [...state.movies, ...action.payload.results]
-            state.totalPages = action.payload.total_pages
+            if (action.payload?.results.length >= 0) {
+                state.movies = [...state.movies, ...action.payload.results]
+                state.totalPages = action.payload.total_pages
+            }
             state.fetchStatus = 'success'
         }).addCase(fetchMovies.pending, (state) => {
             state.fetchStatus = 'loading'

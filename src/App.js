@@ -40,8 +40,17 @@ const App = () => {
   }
 
   const searchMovies = (query) => {
-    navigate('/')
-    getSearchResults(query)
+    // Search endpoint does not work since the repository was cloned
+    // from https://github.com/E-Tarik/coding-assignment
+    // Also, we are listening the keyup, which means is fired when a key is released, therefore this fn is triggered.
+    // We should listen the onChange event instead.
+    // It is recommended to use debounce too when implementing search functionality in order to improve the performance and user experience.
+    // Debouncing is a technique that delays the execution of a fn until after some time has passed since the last time it was called.
+    // This helps to reduce the number of unnecessary requests to the server and improve the performance of the application, especially if the search function involves complex operations or if the data set is large.
+    // To implement debounce in a React application, we can use a debounce function from a library like Lodash.
+
+    // navigate('/')
+    // getSearchResults(query)
   }
 
   const getMovies = () => {
@@ -93,10 +102,10 @@ const App = () => {
       <Header searchMovies={searchMovies} searchParams={searchParams} setSearchParams={setSearchParams} />
 
       <div className="container">
-        <div>Showing { page } page of { state.movies.totalPages }</div>
         <Routes>
           <Route path="/" element={(
               <Fragment>
+                <div>Showing { page } page of { state.movies.totalPages }</div>
                 <Movies movies={movies} viewTrailer={viewTrailer} closeCard={closeCard} />
                 <div ref={loaderRef}></div>
               </Fragment>
