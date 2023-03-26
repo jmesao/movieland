@@ -36,6 +36,10 @@ We can create a helper fn to reuse the logic improving the readability, scalabil
 * Avoid having commented code like [here](https://github.com/E-Tarik/coding-assignment/blob/master/src/test/watchLater.test.js#L19&L23) because can cause confusion for developers.
 
 
+* `starred` and `watchLater` components look like duplicated?
+  They are using the same `HTML` and `CSS`. We could create one generic component for that.
+  Create `props` and pass the `movies`, and `headerTitleMovies` to show a header title when there are movies and `emptyTextMovies` to show when there are no movies.
+
 ## constants.js
 
 We should not expose sensitive/private information on a [constants.js](https://github.com/E-Tarik/coding-assignment/blob/master/src/constants.js) file.
@@ -169,10 +173,6 @@ For instance, this structure looks better https://github.com/E-Tarik/coding-assi
 
 * Set coverage threshold https://create-react-app.dev/docs/running-tests#coverage-reporting at least starting by 80% and increasing it until getting 100%. We should try to cover as much as possible delivering good quality and reducing the number of bugs.
 
-
-* `starred` and `watchLater` components look like duplicated?
-  They are using the same `HTML` and `CSS`. We could create one generic component for that.
-  Create `props` and pass the `movies`, and `headerTitleMovies` to show a header title when there are movies and `emptyTextMovies` to show when there are no movies.
 
 ## User Experience
 
