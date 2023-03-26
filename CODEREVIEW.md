@@ -67,6 +67,11 @@ We should not expose sensitive/private information on a [constants.js](https://g
 
 * About the rest of the slices in the `data` directory, it seems they are ok following the standard defined here https://redux-toolkit.js.org/tutorials/quick-start#create-a-redux-state-slice
 
+
+* We should transform the response when calling an API in the front-end because makes it simpler to extract the data we need and eliminates unnecessary complexity.
+  Also, it optimizes our application for performance given reduces the amount of data extracting only the ones that we need.
+
+
 ## App.js
 
 * It contains a lot of definitions, and I see is growing a lot and in the future could be hard to read and maintain. We should use the `ES Modules` pattern (every single file can be created as a module) and import them where needed.
@@ -181,3 +186,12 @@ For instance, this structure looks better https://github.com/E-Tarik/coding-assi
 
 
 * If there is something wrong, we should provide feedback to the users.
+
+
+* Search endpoint does not work since the repository was cloned from https://github.com/E-Tarik/coding-assignment.
+Also, we are listening to the `onKeyUp`, which means is fired when a key is released, therefore `searchMovies` fn is triggered.
+We should listen to the `onChange` event instead.
+It is recommended to use debounce too when implementing search functionality in order to improve the performance and user experience.
+Debouncing is a technique that delays the execution of a fn until after some time has passed since the last time it was called.
+This helps to reduce the number of unnecessary requests to the server and improve the performance of the application, especially if the search function involves complex operations or if the data set is large.
+To implement debounce in a React application, we can use a debounce function from a library like Lodash.
